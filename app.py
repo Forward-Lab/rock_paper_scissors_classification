@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-
+"""
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
@@ -19,10 +19,14 @@ def index():
         f.save(file_path)
         predict = model.rps_predict(file_path)
         return render_template("index.html", img=static_path, ret_=predict)
+"""
+@app.route("/")
+def index():
+    return print('sdfsdf')
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT",5000)))
+    app.run(debug=True)
 
 
 

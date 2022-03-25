@@ -1,7 +1,10 @@
+import tensorflow as tf
+import numpy as np
 import cv2
+import os
 
 
-def rps_predict(file_path, model):
+def rps_predict(file_path):
 
     # Define Hyperparameter
     IMG_WIDTH = 112
@@ -15,5 +18,9 @@ def rps_predict(file_path, model):
 
     x_data = dst_img.reshape(-1, IMG_WIDTH, IMG_HEIGHT, 3)
 
-    return model.predict(x_data)
+    model = tf.keras.models.load_model('MobileNet_Colab.h5')
 
+    class_names = {0: 'paper', 1: 'rock', 2: 'scissor'}
+    ret_ = class_names[np.argmax(model.predict(x_data))]
+
+    return ret_
